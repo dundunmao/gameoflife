@@ -11,6 +11,10 @@ public class Cell {
 	public boolean isLiving() {
 		return isLiving;
 	}
+	
+	public void setIsLiving(boolean isLiving) {
+		this.isLiving = isLiving;
+	}
 
 	public void updateIsLiving() {
 		this.isLiving = willLive;

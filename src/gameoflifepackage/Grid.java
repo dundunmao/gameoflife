@@ -14,8 +14,9 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 	private Cell[][] grid = new Cell[100][100];
 	private int numCols, numRows;
 	private int cellSizeChange = 18;
-	private Color cellColor=Color.YELLOW;
-	private Color gridColor=Color.GRAY;
+	private Color cellColor = Color.YELLOW;
+	private Color gridColor = Color.GRAY;
+	private boolean isClickMakingCellsLive = true;
 
 	public Grid() {
 		// Can be changed later
@@ -77,11 +78,15 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 		int row = event.getY() / 18;
 		int col = event.getX() / 18;
 		grid[row][col].swapIsLiving();
+		this.isClickMakingCellsLive = grid[row][col].isLiving();
 		repaint();
 	}
 
 	public void mouseDragged(MouseEvent event) {
-		mousePressed(event);
+		int row = event.getY() / 18;
+		int col = event.getX() / 18;
+		grid[row][col].setIsLiving(isClickMakingCellsLive);
+		repaint();
 	}
 
 	public void mouseMoved(MouseEvent event) {
