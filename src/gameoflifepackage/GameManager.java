@@ -1,4 +1,5 @@
 package gameoflifepackage;
+
 public class GameManager {
 	Grid grid;
 	

@@ -1,4 +1,5 @@
 package gameoflifepackage;
+
 import javax.swing.SwingUtilities;
 
 public class GameofLife {

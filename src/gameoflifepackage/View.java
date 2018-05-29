@@ -3,11 +3,19 @@ package gameoflifepackage;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JSlider;
+import javax.swing.Timer;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class View extends JFrame implements ActionListener, ChangeListener, ItemListener {
   private static final long serialVersionUID = 1L;
@@ -15,7 +23,7 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
   private GameManager gameManager;
   private JButton nextButton, startButton, cellColorButton, gridColorButton;
   private JSlider speedSlider, sizeSlider;
-  private JComboBox<String> comboBox;
+  private JComboBox<String> patternSelectorComboBox;
   private JLabel speedImg, sizeImg, paintImg, backImg;
   private static final String[] names = {
 		"Clear",
@@ -23,7 +31,8 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
 		"Lightweight Spaceship",
 		"Pulsar",
 		"Gosper Glider Gun",
-		"Blinker Fuse", "COEN 275"
+		"Blinker Fuse",
+		"COEN 275"
 	};
 
   ImageIcon speedIcon = new ImageIcon("src/resource/speed.jpeg");
@@ -74,11 +83,11 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
 	  sizeSlider.addChangeListener(this);
 	  add(sizeSlider);
 	
-	  this.comboBox = new JComboBox<String>(names);
-	  comboBox.setBounds(700, 700, 200, 25);
-	  comboBox.setMaximumRowCount(5);
-	  comboBox.addItemListener(this);
-	  add(comboBox);
+	  this.patternSelectorComboBox = new JComboBox<String>(names);
+	  patternSelectorComboBox.setBounds(700, 700, 200, 25);
+	  patternSelectorComboBox.setMaximumRowCount(5);
+	  patternSelectorComboBox.addItemListener(this);
+	  add(patternSelectorComboBox);
 	
 	  this.speedImg = new JLabel(speedIcon);
 	  speedImg.setBounds(340, 695, 50, 30);
@@ -146,22 +155,22 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
         grid.clearGrid();
         repaint();
       } else if (item.equals(names[1])) {
-        grid.exploreView();
+        grid.fillGrid();
         repaint();
       } else if (item.equals(names[2])) {
-        grid.spaceshipView();
+        grid.setSpaceshipPattern();
         repaint();
       } else if (item.equals(names[3])) {
-        grid.pulsarView();
+        grid.setPulsarPattern();
         repaint();
       } else if (item.equals(names[4])) {
-        grid.gliderView();
+        grid.setGliderPattern();
         repaint();
       } else if (item.equals(names[5])) {
-        grid.blinkerView();
+        grid.setBlinkerPattern();
         repaint();
       } else if (item.equals(names[6])) {
-        grid.coenView();
+        grid.setCOENPattern();
         repaint();
       }
     }

@@ -122,7 +122,7 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 		}
 	}
 
-	public void exploreView() {
+	public void fillGrid() {
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numCols; col++) {
 				Cell cell = getCell(row, col);
@@ -132,62 +132,61 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 		}
 	}
 	
-	public void spaceshipView() {
+	public void setSpaceshipPattern() {
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numCols; col++) {
 				Cell cell = getCell(row, col);
 				cell.setWillLive(false);
 				cell.updateIsLiving();
-				if((row==17&&(col==7||col==9)) || (row==18&&(col==8||col==9)) || (row==19)&&(col==8)||
-						(row==15&&(col==14||col==15)) || (row==16&&(col==14||col==16)) || (row==17)&&(col==14)||
-						(row==19&&(col==12)) || (row==20&&(col==12||col==13)) || ((row==21)&&(col==11 || col==13)) ||
-						(row==17&&(col==31||col==32||col==33))|| (row==18 && (col==31 || col==34)) || (row==19 && (col==31))||
-						(row==20&&(col==31))||(row==21&&(col==32||col==34))
-						) {
+				if((row == 17 && (col == 7 || col == 9)) || (row == 18 && (col == 8|| col == 9)) || (row == 19) && (col == 8)||
+					(row == 15 && (col == 14 || col == 15)) || (row == 16 && (col == 14||col == 16)) || (row == 17) && (col == 14) ||
+					(row == 19 && (col == 12)) || (row == 20 && (col == 12 || col == 13)) || ((row == 21) && (col == 11 || col == 13)) ||
+					(row == 17 && (col == 31 || col == 32 || col == 33)) || (row == 18 && (col == 31 || col == 34)) || (row == 19 &&  (col == 31)) ||
+					(row == 20 && (col == 31)) || (row == 21 && (col == 32 || col == 34))) {
 					cell.setIsLiving(true);
 				}
 			}
 		}
 	}
 
-	public void pulsarView() {
+	public void setPulsarPattern() {
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numCols; col++) {
 				Cell cell = getCell(row, col);
 				cell.setWillLive(false);
 				cell.updateIsLiving();
-				if((row == 6 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 ))||
-						(row == 8 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
-						(row == 9 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
-						(row == 10 &&(col== 14||col == 19 ||col == 21 ||col == 26)) ||
-						(row == 11 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 ))||
-						(row == 13 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 ))||
-						(row == 14 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
-						(row == 15 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
-						(row == 16 &&(col== 14||col == 19 ||col == 21 ||col == 26)) ||
-						(row == 18 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 ))) {
+				if ((row == 6 && (col == 16 || col == 17 || col == 18 || col == 22 || col == 23 || col == 24 )) || 
+					(row == 8 && (col == 14 || col == 19 || col == 21 || col == 26)) ||
+					(row == 9 && (col == 14 || col == 19 || col == 21 || col == 26)) ||
+					(row == 10 && (col== 14 || col == 19 || col == 21 || col == 26)) ||
+					(row == 11 && (col == 16 || col == 17 || col == 18 || col == 22 || col == 23 || col == 24 )) || 
+					(row == 13 && (col == 16 || col == 17 || col == 18 || col == 22 || col == 23 || col == 24 )) || 
+					(row == 14 && (col == 14 || col == 19 || col == 21 || col == 26)) ||
+					(row == 15 && (col == 14 || col == 19 || col == 21 || col == 26)) ||
+					(row == 16 && (col== 14 || col == 19 || col == 21 || col == 26)) ||
+					(row == 18 && (col == 16 || col == 17 || col == 18 || col == 22 || col == 23 || col == 24 ))) {
 					cell.setIsLiving(true);
 				}
 			}
 		}
 	}
-	public void gliderView() {
+	public void setGliderPattern() {
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numCols; col++) {
 				Cell cell = getCell(row, col);
 				cell.setWillLive(false);
 				cell.updateIsLiving();
-				if ((row == 13 && (col == 29 ||col == 30 ||col == 40 ||col == 41)) ||
-						(row == 14 && (col == 28 ||col == 30 ||col == 40 ||col == 41)) ||
-						(row == 15 && (col == 6 ||col == 7 ||col == 15 ||col == 16||col == 28||col == 29)) ||
-						(row == 16 && (col == 6 ||col == 7 ||col == 14 ||col == 16)) ||
-						(row == 17 && (col == 14 ||col == 15 ||col == 22 ||col == 23)) ||
-						(row == 18 && (col == 22 ||col == 24)) ||
+				if ((row == 13 && (col == 29 || col == 30 || col == 40 || col == 41)) ||
+						(row == 14 && (col == 28 || col == 30 || col == 40 || col == 41)) ||
+						(row == 15 && (col == 6 || col == 7 || col == 15 || col == 16||col == 28 || col == 29)) ||
+						(row == 16 && (col == 6 || col == 7 || col == 14 || col == 16)) ||
+						(row == 17 && (col == 14 || col == 15 || col == 22 || col == 23)) ||
+						(row == 18 && (col == 22 || col == 24)) ||
 						(row == 19 && (col == 22)) ||
-						(row == 20 && (col == 41 ||col == 42)) ||
-						(row == 21 && (col == 41 ||col == 43)) ||
+						(row == 20 && (col == 41 || col == 42)) ||
+						(row == 21 && (col == 41 || col == 43)) ||
 						(row == 22 && (col == 41)) ||
-						(row == 25 && (col == 30 ||col == 31 ||col == 32)) ||
+						(row == 25 && (col == 30 || col == 31 || col == 32)) ||
 						(row == 26 && (col == 30)) ||
 						(row == 27 && (col == 31))) {
 					cell.setIsLiving(true);
@@ -196,7 +195,7 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 		}
 	}
 
-	public void blinkerView() {
+	public void setBlinkerPattern() {
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numCols; col++) {
 				Cell cell = getCell(row, col);
@@ -221,7 +220,7 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 		}
 	}
 	
-	public void coenView() {
+	public void setCOENPattern() {
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numCols; col++) {
 				Cell cell = getCell(row, col);
@@ -229,7 +228,7 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 				cell.updateIsLiving();
 				if ((row == 6 && (col == 8 || col == 9 || col == 10 || col == 11 || col == 15 || col == 16 || col == 17 || col == 18 || col == 22 || col == 23 || col == 24 || col == 25 || col == 29 || col == 33)) ||
 						(row == 7 && (col == 8 || col == 15 || col == 18 || col == 22 || col == 29 || col == 30 || col == 33)) ||
-						(row == 8 && (col == 8 || col == 15 || col == 18 || col == 22 ||col == 23 ||col == 24 ||col == 25|| col == 29 || col == 31 || col == 33)) ||
+						(row == 8 && (col == 8 || col == 15 || col == 18 || col == 22 || col == 23 || col == 24 || col == 25|| col == 29 || col == 31 || col == 33)) ||
 						(row == 9 && (col == 8 || col == 15 || col == 18 || col == 22 || col == 29 || col == 32 || col == 33)) ||
 						(row == 10 && (col == 8 || col == 9 || col == 10 || col == 11 || col == 15 || col == 16 || col == 17 || col == 18 || col == 22 || col == 23 || col == 24 || col == 25 || col == 29 || col == 33)) ||
 						(row == 14 && (col == 13 || col == 14 || col == 15 || col == 20 || col == 21 || col == 22 || col == 27 || col == 28 || col == 29)) ||
