@@ -13,7 +13,7 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
   private static final long serialVersionUID = 1L;
   private Grid grid;
   private GameManager gameManager;
-  private JButton nextButton, startButton, cellcolChoosBtn, gridcolChoosBtn;
+  private JButton nextButton, startButton, cellColorButton, gridColorButton;
   private JSlider speedSlider, sizeSlider;
   private JComboBox<String> comboBox;
   private JLabel speedImg, sizeImg, paintImg, backImg;
@@ -54,15 +54,15 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
 	  startButton.addActionListener(this);
 	  add(startButton);
 	
-	  this.cellcolChoosBtn = new JButton("Cell");
-	  cellcolChoosBtn.setBounds(750, 728, 80, 25);
-	  cellcolChoosBtn.addActionListener(this);
-	  add(cellcolChoosBtn);
+	  this.cellColorButton = new JButton("Cell");
+	  cellColorButton.setBounds(750, 728, 80, 25);
+	  cellColorButton.addActionListener(this);
+	  add(cellColorButton);
 	
-	  this.gridcolChoosBtn = new JButton("Grid");
-	  gridcolChoosBtn.setBounds(750, 755, 80, 25);
-	  gridcolChoosBtn.addActionListener(this);
-	  add(gridcolChoosBtn);
+	  this.gridColorButton = new JButton("Grid");
+	  gridColorButton.setBounds(750, 755, 80, 25);
+	  gridColorButton.addActionListener(this);
+	  add(gridColorButton);
 	
 	  this.speedSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
 	  speedSlider.setBounds(385, 700, 110, 25);
@@ -81,22 +81,20 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
 	  add(comboBox);
 	
 	  this.speedImg = new JLabel(speedIcon);
-	  speedImg.setBounds(340,695,50,30);
+	  speedImg.setBounds(340, 695, 50, 30);
 	  add(speedImg);
 	
 	  this.sizeImg = new JLabel(zoomIcon);
-	  sizeImg.setBounds(492,700,50,30);
+	  sizeImg.setBounds(492, 700, 50, 30);
 	  add(sizeImg);
 	
 	  this.paintImg = new JLabel(paintIcon);
-	  paintImg.setBounds(700,735,50,30);
+	  paintImg.setBounds(700, 735, 50, 30);
 	  add(paintImg);
 	
 	  this.backImg = new JLabel(backIcon);
-	  backImg.setBounds(0,0,1000,1000);
+	  backImg.setBounds(0, 0, 1000, 1000);
 	  add(backImg);
-	
-	  // this.getContentPane().setBackground(Color.white);
   }
 
   public void actionPerformed(ActionEvent event) {
@@ -114,15 +112,15 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
     } else if (event.getSource() == timer) {
       gameManager.nextGeneration();
       repaint();
-    } else if(event.getSource() == cellcolChoosBtn) {
-      Color initialcolor=Color.YELLOW;
-      Color color1=JColorChooser.showDialog(this,"Select a color",initialcolor);
-      grid.setcellColor(color1);
+    } else if(event.getSource() == cellColorButton) {
+      Color initialcolor = Color.YELLOW;
+      Color color = JColorChooser.showDialog(this, "Select a color", initialcolor);
+      grid.setCellColor(color);
       repaint();
-    } else if(event.getSource() == gridcolChoosBtn) {
-      Color initialcolor=Color.GRAY;
-      Color color2=JColorChooser.showDialog(this,"Select a color",initialcolor);
-      grid.setgridColor(color2);
+    } else if(event.getSource() == gridColorButton) {
+      Color initialcolor = Color.GRAY;
+      Color color = JColorChooser.showDialog(this, "Select a color", initialcolor);
+      grid.setGridColor(color);
       repaint();
     }
   }
@@ -130,12 +128,11 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
   public void stateChanged(ChangeEvent event) {
     if (event.getSource() == sizeSlider) {
       int sizeValue = sizeSlider.getValue();
-      this.grid.setNewcellSize(18 - (sizeValue / 15));
-    }
-    if (event.getSource() == speedSlider) {
-      // Speed can range from 1000ms-4000ms
+      this.grid.setCellSize(18 - (sizeValue / 15));
+    } else if (event.getSource() == speedSlider) {
+      // Speed can range from 1000ms-50ms
       int speedValue = speedSlider.getValue();
-      int hertz = 1 + speedValue * 50 / 100;
+      int hertz = 1 + speedValue * 19 / 100;
       timer.setDelay(1000 / hertz);
     }
   }
@@ -146,24 +143,24 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
     int stateChange = e.getStateChange();
     if (stateChange == ItemEvent.SELECTED) {
       if (item.equals(names[0])){
-        grid.setInitailView();
+        grid.clearGrid();
         repaint();
-      } else if (item.equals(names[1])){
+      } else if (item.equals(names[1])) {
         grid.exploreView();
         repaint();
-      } else if (item.equals(names[2])){
-        grid.SpaceshipView();
+      } else if (item.equals(names[2])) {
+        grid.spaceshipView();
         repaint();
-      } else if (item.equals(names[3])){
+      } else if (item.equals(names[3])) {
         grid.pulsarView();
         repaint();
-      } else if (item.equals(names[4])){
+      } else if (item.equals(names[4])) {
         grid.gliderView();
         repaint();
-      } else if (item.equals(names[5])){
+      } else if (item.equals(names[5])) {
         grid.blinkerView();
         repaint();
-      }else if (item.equals(names[6])){
+      } else if (item.equals(names[6])) {
         grid.coenView();
         repaint();
       }

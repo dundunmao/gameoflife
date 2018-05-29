@@ -13,7 +13,7 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 	private static final long serialVersionUID = 1L;
 	private Cell[][] grid = new Cell[100][100];
 	private int numCols, numRows;
-	private int cellSizeChange = 18;
+	private int cellSize = 18;
 	private Color cellColor = Color.YELLOW;
 	private Color gridColor = Color.GRAY;
 	private boolean isClickMakingCellsLive = true;
@@ -51,15 +51,14 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 		return grid[row][col];
 	}
 
-	public void setcellColor(Color c) {
-		cellColor = c;
+	public void setCellColor(Color color) {
+		cellColor = color;
 	}
-	public void setgridColor(Color col) {
-		gridColor = col;
+	public void setGridColor(Color color) {
+		gridColor = color;
 	}
 
 	public void actionPerformed(ActionEvent event) {
-
 	}
 
 	public void mouseClicked(MouseEvent event) {
@@ -75,16 +74,16 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 	}
 
 	public void mousePressed(MouseEvent event) {
-		int row = event.getY() / 18;
-		int col = event.getX() / 18;
+		int row = event.getY() / cellSize;
+		int col = event.getX() / cellSize;
 		grid[row][col].swapIsLiving();
 		this.isClickMakingCellsLive = grid[row][col].isLiving();
 		repaint();
 	}
 
 	public void mouseDragged(MouseEvent event) {
-		int row = event.getY() / 18;
-		int col = event.getX() / 18;
+		int row = event.getY() / cellSize;
+		int col = event.getX() / cellSize;
 		grid[row][col].setIsLiving(isClickMakingCellsLive);
 		repaint();
 	}
@@ -98,28 +97,27 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numCols; col++) {
 				g.setColor(Color.BLACK);
-				g.drawRect(col * cellSizeChange, row * cellSizeChange, cellSizeChange, cellSizeChange);
+				g.drawRect(col * cellSize, row * cellSize, cellSize, cellSize);
 				if (grid[row][col].isLiving() == false) {
 					g.setColor(gridColor);
 				} else {
 					g.setColor(cellColor);
 				}
-				g.fillRect(col * cellSizeChange + 1, row * cellSizeChange + 1, cellSizeChange - 1, cellSizeChange - 1);
+				g.fillRect(col * cellSize + 1, row * cellSize + 1, cellSize - 1, cellSize - 1);
 			}
 		}
 	}
 
-	public void setNewcellSize(int newSize) {
-		cellSizeChange = (newSize >= 5 ? newSize : 18);
+	public void setCellSize(int cellSize) {
+		this.cellSize = cellSize;
 		repaint();
 	}
 
-	public void setInitailView() {
+	public void clearGrid() {
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numCols; col++) {
 				Cell cell = getCell(row, col);
-				cell.setWillLive(false);
-				cell.updateIsLiving();
+				cell.setIsLiving(false);
 			}
 		}
 	}
@@ -133,7 +131,8 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 			}
 		}
 	}
-	public void SpaceshipView() {
+	
+	public void spaceshipView() {
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numCols; col++) {
 				Cell cell = getCell(row, col);
@@ -144,9 +143,9 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 						(row==19&&(col==12)) || (row==20&&(col==12||col==13)) || ((row==21)&&(col==11 || col==13)) ||
 						(row==17&&(col==31||col==32||col==33))|| (row==18 && (col==31 || col==34)) || (row==19 && (col==31))||
 						(row==20&&(col==31))||(row==21&&(col==32||col==34))
-						)
-					cell.setWillLive(true);
-				cell.updateIsLiving();
+						) {
+					cell.setIsLiving(true);
+				}
 			}
 		}
 	}
@@ -166,9 +165,9 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 						(row == 14 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
 						(row == 15 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
 						(row == 16 &&(col== 14||col == 19 ||col == 21 ||col == 26)) ||
-						(row == 18 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 )))
-					cell.setWillLive(true);
-				cell.updateIsLiving();
+						(row == 18 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 ))) {
+					cell.setIsLiving(true);
+				}
 			}
 		}
 	}
@@ -190,12 +189,10 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 						(row == 22 && (col == 41)) ||
 						(row == 25 && (col == 30 ||col == 31 ||col == 32)) ||
 						(row == 26 && (col == 30)) ||
-						(row == 27 && (col == 31)))
-					cell.setWillLive(true);
-				cell.updateIsLiving();
-
+						(row == 27 && (col == 31))) {
+					cell.setIsLiving(true);
+				}
 			}
-
 		}
 	}
 
@@ -205,21 +202,21 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 				Cell cell = getCell(row, col);
 				cell.setWillLive(false);
 				cell.updateIsLiving();
-				if((row==12&&(col==7||col==8||col==9)) ||
-						(row==13&&(col==6||col==8||col==9||col==10)) ||
-						(row==14&&(col==5||col==6||col==9||col==10||col==11)) ||
-						(row==15 && (col==6 || col==7||col==12))||
-						(row==16&&(col==6||col==7||col==9||col==10||col==11))||
-						(row==17 && (col==7||col==8||col==9||col==10))||
-						(row==18)&&(col==8)||
-						(row==15 && (col==14||col==15||col==16))||
-						(row==15 && (col==18||col==19||col==20))||
-						(row==15 && (col==22||col==23||col==24))||
-						(row==15 && (col==26||col==27||col==28)) ||
-						(row==15 && (col==30||col==31||col==32))||
-						(row==15 && (col==34||col==35||col==36)))
-					cell.setWillLive(true);
-				cell.updateIsLiving();
+				if((row == 12 && (col == 7 || col ==8 || col == 9)) ||
+						(row == 13 && (col == 6 || col ==8 || col == 9 || col == 10)) ||
+						(row == 14 && (col == 5 || col ==6 || col == 9 || col == 10|| col == 11)) ||
+						(row == 15 && (col == 6 || col ==7 || col == 12)) ||
+						(row == 16 && (col == 6 || col ==7 || col == 9 || col == 10 || col == 11)) ||
+						(row == 17 && (col == 7 || col ==8 || col == 9 || col == 10)) ||
+						(row == 18)&& (col == 8) ||
+						(row == 15 && (col == 14 || col==15 || col == 16)) ||
+						(row == 15 && (col == 18 || col==19 || col == 20)) ||
+						(row == 15 && (col == 22 || col==23 || col == 24)) ||
+						(row == 15 && (col == 26 || col==27 || col == 28)) ||
+						(row == 15 && (col == 30 || col==31 || col == 32)) ||
+						(row == 15 && (col == 34 || col==35 || col == 36))) {
+					cell.setIsLiving(true);
+				}
 			}
 		}
 	}
@@ -239,10 +236,9 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 						(row == 15 && (col == 15 || col == 22 || col == 27)) ||
 						(row == 16 && (col == 14 || col == 22 || col == 27|| col == 28|| col == 29)) ||
 						(row == 17 && (col == 13 || col == 22 || col == 29)) ||
-						(row == 18 && (col == 13 || col == 14 || col == 15 || col == 22 || col == 27 || col == 28 || col == 29)))
-					cell.setWillLive(true);
-				cell.updateIsLiving();
-
+						(row == 18 && (col == 13 || col == 14 || col == 15 || col == 22 || col == 27 || col == 28 || col == 29))) {
+					cell.setIsLiving(true);
+				}
 			}
 		}
 	}
