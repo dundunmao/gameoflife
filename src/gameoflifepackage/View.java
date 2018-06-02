@@ -27,7 +27,7 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
   private JLabel speedImg, sizeImg, paintImg, backImg;
   private static final String[] names = {
 		"Clear",
-		"Small Exploder",
+		"Fill Grid",
 		"Lightweight Spaceship",
 		"Pulsar",
 		"Gosper Glider Gun",
@@ -45,7 +45,7 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
 	  this.grid = grid;
 	  this.gameManager = gameManager;
 	
-	  setSize(1000, 1000);
+	  setSize(1000, 850);
 	  setLayout(null);
 	  setVisible(true);
 	  setLocationRelativeTo(null);
